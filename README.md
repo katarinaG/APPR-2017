@@ -4,8 +4,10 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal. Tukaj boste
-napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V svojem projektu bom analizirala rezultate Everest maratona od leta 2003 do 2016. Analizirala bom strukturo (spol, državljanstvo) prijavljenih kandidatov, spreminjanje rekordov skozi čas (npr. a je ista oseba večkrat postavila rekord; države iz katerih je največ rekorderjev (M, Ž); starost rekorderjev), spreminjanje odstopov od maratona (npr. število odstopov skozi leta; starost in spol tistih, ki so odstopili).
+
+Podatke bom pridobila iz spletne strani: 
+- http://www.everestmarathon.com/
 
 ## Program
 
