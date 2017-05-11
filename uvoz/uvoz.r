@@ -1,3 +1,26 @@
+link <- "http://everestmarathon.com/"
+home <- html_session(link) %>% read_html()
+menu <- home %>% html_node(xpath = "//li[@id='mod_menu_no_5']") %>% html_nodes(xpath = ".//li")
+leta <- sapply(menu, html_text) %>% strapplyc("([0-9]+)") %>% unlist() %>% parse_integer()
+strani <- menu %>% html_nodes(xpath = ".//a") %>% html_attr("href")
+
+uvozi.rez <- function(leto, stran) {
+  tabela <- paste0(link, stran) %>% html_session() %>% read_html() %>%
+    html_nodes(xpath = "//table") %>% .[[1]] %>% html_table(fill = TRUE)
+  tabela <- tabela[-c(1, 2), ]
+  for (i in 1:ncol(tabela)) {
+    if (is.character(tabela[[i]])) {
+      Encoding(tabela[[i]]) <- "UTF-8"
+    }
+  }
+  return(tabela)
+}
+
+vsi.rez <- lapply(1:length(leta), . %>% { uvozi.rez(leta[.], strani[.]) })
+
+
+
+
 # 2. faza: Uvoz podatkov
 
 # Funkcija, ki uvozi občine iz Wikipedije
