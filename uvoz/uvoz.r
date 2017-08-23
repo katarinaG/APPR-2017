@@ -25,7 +25,7 @@ uvozi.rez <- function(leto, stran) {
 
 vsi.rez <- lapply(1:length(leta), . %>% { uvozi.rez(leta[.], strani[.]) })
 
-rez.2017 <- data.frame(vsi.rez[[1]]) 
+rez.2017 <- data.frame(vsi.rez[[1]])
 rez.2016 <- data.frame(vsi.rez[[2]]) 
 rez.2015 <- data.frame(vsi.rez[[3]]) 
 rez.2014  <- data.frame(vsi.rez[[4]]) 
@@ -41,6 +41,22 @@ rez.2005  <- data.frame(vsi.rez[[13]])
 rez.2004  <- data.frame(vsi.rez[[14]])
 rez.2003  <- data.frame(vsi.rez[[15]]) 
 
+
+rez.2003 <- data.frame(rez.2003$X3,rez.2003$X4, rez.2003$X5)
+rez.2004 <- data.frame(rez.2004$X3,rez.2004$X4, rez.2004$X5)
+rez.2005 <- data.frame(rez.2005$X3,rez.2005$X4, rez.2005$X5, rez.2005$X6)
+rez.2006 <- data.frame(rez.2006$X3,rez.2006$X4, rez.2006$X5, rez.2006$X6)
+rez.2007 <- data.frame(rez.2007$X3,rez.2007$X4, rez.2007$X5, rez.2007$X6)
+rez.2008 <- data.frame(rez.2008$X3,rez.2008$X4, rez.2008$X5, rez.2008$X6)
+rez.2009 <- data.frame(rez.2009$X3,rez.2009$X4, rez.2009$X5, rez.2009$X6)
+rez.2010 <- data.frame(rez.2010$X3,rez.2010$X4, rez.2010$X5, rez.2010$X6)
+rez.2011 <- data.frame(rez.2011$X1,rez.2011$X2, rez.2011$X3, rez.2011$X4)
+rez.2012 <- data.frame(rez.2012$X2,rez.2012$X3, rez.2012$X4, rez.2012$X5)
+rez.2013 <- data.frame(rez.2013$X3,rez.2013$X4, rez.2013$X5)
+rez.2014 <- data.frame(rez.2014$X3,rez.2014$X4, rez.2014$X5)
+rez.2015 <- data.frame(rez.2015$X2,rez.2015$X3, rez.2015$X4, rez.2015$X6, rez.2015$X7, rez.2015$X8)
+rez.2016 <- data.frame(rez.2016$X2,rez.2016$X3, rez.2016$X4, rez.2016$X6, rez.2016$X7, rez.2016$X8)
+rez.2017 <- data.frame(rez.2017$X2,rez.2017$X3, rez.2017$X4, rez.2017$X6, rez.2017$X7, rez.2017$X8)
 
 
 
