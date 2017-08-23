@@ -14,7 +14,13 @@ strani <- menu %>% html_nodes(xpath = ".//a") %>% html_attr("href")
 uvozi.rez <- function(leto, stran) {
   tabela <- paste0(link, stran) %>% html_session() %>% read_html() %>%
     html_nodes(xpath = "//table") %>% .[[1]] %>% html_table(fill = TRUE)
-  tabela <- tabela[-c(1, 2), ]
+  if (leto != 2011) {
+    while (! tabela[1,1] %in% c("1", "01")) {
+      tabela <- tabela[-1, ]
+    }
+  } else {
+    tabela <- tabela[-c(1, 2), ]
+  }
   for (i in 1:ncol(tabela)) {
     if (is.character(tabela[[i]])) {
       Encoding(tabela[[i]]) <- "UTF-8"
