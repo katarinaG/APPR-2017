@@ -172,14 +172,102 @@ rez08 <- df08
 names(rez08) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
 
 #Urejanje razpredelnice za leto 2009
+m2009 <- strsplit(as.character(rez.2009$rez.2009.X6), ":") %>% 
+  sapply(function(x) {
+    if (length(x) != 3) return(c(NA, NA, NA))
+    else return(as.numeric(x))
+  }) %>% t()
+df09 <- data.frame(rez.2009, m2009)
+
+
+df09[4] <- NULL
+rez09 <- df09
+names(rez09) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+
 
 #Urejanje razpredelnice za leto 2010
+m2010 <- strsplit(as.character(rez.2010$rez.2010.X6), ":") %>% 
+  sapply(function(x) {
+    if (length(x) != 3) return(c(NA, NA, NA))
+    else return(as.numeric(x))
+  }) %>% t()
+df10 <- data.frame(rez.2010, m2010)
+
+
+df10[4] <- NULL
+rez10 <- df10
+rez10[rez10==""] <- NA
+
+names(rez10) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+
+
+
 
 #Urejanje razpredelnice za leto 2011
 
+m2011 <- strsplit(as.character(rez.2011$rez.2011.X4), ":") %>% 
+  sapply(function(x) {
+    if (length(x) != 3) return(c(NA, NA, NA))
+    else return(as.numeric(x))
+  }) %>% t()
+df11 <- data.frame(rez.2011, m2011)
+
+
+df11[4] <- NULL
+rez11 <- df11
+rez11[rez11==""] <- NA
+
+names(rez11) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+rez11 <- rez11[-c(93,107,108,109,110,111,112,113,114), ]
+
+
 #Urejanje razpredelnice za leto 2012
 
+m2012 <- strsplit(as.character(rez.2012$rez.2012.X5), ":") %>% 
+  sapply(function(x) {
+    if (length(x) != 3) return(c(NA, NA, NA))
+    else return(as.numeric(x))
+  }) %>% t()
+df12 <- data.frame(rez.2012, m2012)
+
+
+df12[4] <- NULL
+rez12 <- df12
+rez12[rez12==""] <- NA
+
+names(rez12) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+rez12 <- rez12[-c(93), ]
+
 #Urejanje razpredelnice za leto 2013
+
+m2013 <- strsplit(as.character(rez.2013$rez.2013.X4), ":") %>% 
+  sapply(function(x) {
+    if (length(x) != 3) return(c(NA, NA, NA))
+    else return(as.numeric(x))
+  }) %>% t()
+df13 <- data.frame(rez.2013, m2013)
+
+stevilo13 <- nrow(df13)
+m13 <- data.frame(matrix(data = NA, nrow = stevilo13, ncol = 1))
+df13$spol <- m13
+
+
+rez13$Name <- gsub("Mr. ","",rez13$Name)
+rez13$Name <- gsub("Miss ", "", rez13$Name)
+rez13$Name <- gsub("Ms.", "", rez13$Name)
+rez13$Name <- gsub("Mrs.", "", rez13$Name)
+rez13$Name <- gsub("Mr.","",rez13$Name)
+
+
+
+df13[2] <- NULL
+df13[df13==""] <- NA
+rez13 <- df13[c(1,6,2,3,4,5)]
+
+names(rez13) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+rez13 <- rez14[-c(46),]
+
+
 
 #Urejanje razpredelnice za leto 2014
 rez.2014 <- rez.2014[-c(65,66), ]
@@ -204,10 +292,58 @@ rez14 <- df14[c(1, 3,2, 4,5,6)]
 names(rez14) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
 
 
+rez14$Name <- gsub("Mr. ","",rez14$Name)
+rez14$Name <- gsub("Miss ", "", rez14$Name)
+rez14$Name <- gsub("Ms.", "", rez14$Name)
+rez14$Name <- gsub("Mrs.", "", rez14$Name)
+rez14$Name <- gsub("Mr.","",rez14$Name)
 
 
 
 
+#Urejanje razpredelnice za leto 2015
+
+rez.2015[rez.2015==""] <- NA
+rez15 <- rez.2015
+names(rez15) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+
+rez15$Name <- gsub("Mr. ","",rez15$Name)
+rez15$Name <- gsub("Miss ", "", rez15$Name)
+rez15$Name <- gsub("Ms.", "", rez15$Name)
+rez15$Name <- gsub("Mrs.", "", rez15$Name)
+rez15$Name <- gsub("Mr.","",rez15$Name)
+
+
+
+
+#Urejanje razpredelnice za leto 2016
+rez.2016[rez.2016==""] <- NA
+rez16 <- rez.2016
+names(rez16) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+
+rez16$Name <- gsub("Mr. ","",rez16$Name)
+rez16$Name <- gsub("Miss.", "", rez16$Name)
+rez16$Name <- gsub("Ms.", "", rez16$Name)
+rez16$Name <- gsub("Mrs.", "", rez16$Name)
+rez16$Name <- gsub("Mr.","",rez16$Name)
+
+
+rez16 <- rez16[-c(29),]
+
+
+#Urejanje razpredelnice za leto 2017
+rez.2017[rez.2017==""] <- NA
+rez17 <- rez.2017
+names(rez17) <- c("Name","Gender","Country","Hours","Minutes","Seconds")
+
+rez17 <- rez17[-c(108,109,110,111,112,113,114), ]
+
+rez17$Name <- gsub("Mr. ","",rez17$Name)
+rez17$Name <- gsub("Miss.", "", rez17$Name)
+rez17$Name <- gsub("Ms.", "", rez17$Name)
+rez17$Name <- gsub("Mrs.", "", rez17$Name)
+
+rez17 <- rez17[-c(47),]
 
 
 
