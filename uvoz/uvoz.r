@@ -372,4 +372,59 @@ rez <- rbind(rez03, rez04, rez05, rez06, rez07, rez08, rez09,
   mutate(Time = as.difftime(paste(Hours, Minutes, Seconds, sep = ":"))) %>%
   select(-Hours, -Minutes, -Seconds)
 
+#Drzavljanstvo zelimo spremeniti v drzave 
+
+rez$Nationality[rez$Nationality == "Nepali"] <- "Nepal"
+rez$Nationality[rez$Nationality == "Polish"] <- "Poland"
+rez$Nationality[rez$Nationality == "Spanish"] <- "Spain"
+rez$Nationality[rez$Nationality == "American"] <- "United States"
+rez$Nationality[rez$Nationality == "German"] <- "Germany"
+rez$Nationality[rez$Nationality == "New Zealander"] <- "New Zealand"
+rez$Nationality[rez$Nationality == "U.K."] <- "United Kingdom"
+rez$Nationality[rez$Nationality == "U.S.A."] <- "United States"
+rez$Nationality[rez$Nationality == "Scottish"] <- "United Kingdom"
+rez$Nationality[rez$Nationality == "French"] <- "France"
+rez$Nationality[rez$Nationality == "UK"] <- "United Kingdom"
+rez$Nationality[rez$Nationality == "USA"] <- "United States"
+rez$Nationality[rez$Nationality == "Swiss"] <- "Switzerland"
+rez$Nationality[rez$Nationality == "British"] <- "United Kingdom"
+rez$Nationality[rez$Nationality == "Newzealand"] <- "New Zealand"
+rez$Nationality[rez$Nationality == "Swiss"] <- "Switzerland"
+rez$Nationality[rez$Nationality == "New    Zealand"] <- "New Zealand"
+rez$Nationality[rez$Nationality == "South    Africa"] <- "South Africa"
+rez$Nationality[rez$Nationality == "Hong    Kong"] <- "China"
+rez$Nationality[rez$Nationality == "Swiss"] <- "Switzerland"
+rez$Nationality[rez$Nationality == "Dutch"] <- "Netherlands"
+rez$Nationality[rez$Nationality == "Swedish"] <- "Sweden"
+rez$Nationality[rez$Nationality == "Netherlandase"] <- "Netherlands"
+rez$Nationality[rez$Nationality == "Hungarian"] <- "Hungary"
+rez$Nationality[rez$Nationality == "Catalonia"] <- "Spain"
+rez$Nationality[rez$Nationality == "Uk"] <- "United Kingdom"
+rez$Nationality[rez$Nationality == "Canadan"] <- "Canada"
+rez$Nationality[rez$Nationality == "Brazilian"] <- "Brazilia"
+rez$Nationality[rez$Nationality == "Singaporean"] <- "Singapore"
+rez$Nationality[rez$Nationality == "Indian"] <- "India"
+rez$Nationality[rez$Nationality == "South Afirca"] <- "South Africa"
+rez$Nationality[rez$Nationality == "South Korean"] <- "South Korea"
+rez$Nationality[rez$Nationality == "Israeli"] <- "Israel"
+rez$Nationality[rez$Nationality == "RUssian"] <- "Russia"
+rez$Nationality[rez$Nationality == "Hong Kong"] <- "China"
+rez$Nationality[rez$Nationality == "Irish"] <- "Ireland"
+rez$Nationality[rez$Nationality == "South African"] <- "South Africa"
+rez$Nationality[rez$Nationality == "Chinese"] <- "China"
+rez$Nationality[rez$Nationality == "Japanese"] <- "Japan"
+rez$Nationality[rez$Nationality == "Chileans"] <- "Chile"
+rez$Nationality[rez$Nationality == "Netherland"] <- "Netherlands"
+rez$Nationality[rez$Nationality == "Nepalese"] <- "Nepal"
+rez$Nationality[rez$Nationality == "Czech"] <- "Czech Republic"
+rez$Nationality[rez$Nationality == "Taiwanese"] <- "Taiwan"
+rez$Nationality[rez$Nationality == "Lebanese"] <- "Lebanon"
+
+names(rez)[names(rez) == "Nationality"] <- "Country"
+
+
+
+
+
+
 
