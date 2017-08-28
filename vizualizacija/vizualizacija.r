@@ -44,5 +44,14 @@ gather(razmerje_uspeh, key, value, Vsi, Koncali) %>%
   scale_y_continuous(breaks = seq(0, 200, by =25)) +
   scale_color_discrete(name = "Tekači", labels = c("Končali", "Vsi"))
 
+#Graf, ki prikazuje povprecno hitrost glede na spol in leto
+
+ggplot(stevilo_sodelujocih, aes(x=Year, y=Povprecen_cas, fill = Gender, color=Gender)) + 
+  geom_point(size=6, alpha=0.6) + 
+  xlab("Leto") + ylab("Ure") + ggtitle("Povprečen čas")  + theme_minimal() +
+  scale_x_continuous(breaks = seq(2003, 2017, by =1)) +
+  scale_color_manual(values = c("F" = 'red','M' = 'blue', 'NA' = 'black')) 
+
+
 
 
