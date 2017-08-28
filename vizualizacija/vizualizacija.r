@@ -46,12 +46,14 @@ gather(razmerje_uspeh, key, value, Vsi, Koncali) %>%
 
 #Graf, ki prikazuje povprecno hitrost glede na spol in leto
 
-ggplot(stevilo_sodelujocih, aes(x=Year, y=Povprecen_cas, fill = Gender, color=Gender)) + 
-  geom_point(size=6, alpha=0.6) + 
+stev_sod <- stevilo_sodelujocih[-c(20),]
+ind <- which(is.na(stev_sod$Gender))
+stev_sod[ind, "Gender"] <- 'Ni podatka'
+
+
+ggplot(NULL, aes(x=Year)) + 
+  geom_point(data= stev_sod, aes(y = Povprecen_cas, fill = Gender, color=Gender), size=6, alpha=0.6) + 
   xlab("Leto") + ylab("Ure") + ggtitle("Povprečen čas")  + theme_minimal() +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) +
-  scale_color_manual(values = c("F" = 'red','M' = 'blue', 'NA' = 'black')) 
-
-
-
-
+  scale_color_manual(values = c("F" = 'red','M' = 'blue', 'Ni podatka' = 'black')) +
+  geom_line(data = stevilo_sodelujocih_vsi, aes(y=Povprecen_cas_vsi), size= 1) 
