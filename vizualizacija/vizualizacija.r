@@ -34,8 +34,6 @@ ggplot(stevilo_sodelujocih, aes(x = Year, y = Stevilo_prijav, fill = Gender)) + 
 
 #Graf, ki prikaze stevilo odstopov
 
-
-
 razmerje_uspeh <- data.frame(stevilo_sodelujocih_vsi$Stevilo_prijav_vsi, stevilo_sodelujocih_vsi$Koncali, stevilo_sodelujocih_vsi$Year)
 names(razmerje_uspeh) <- c( "Vsi", "Koncali", "Leto")
 gather(razmerje_uspeh, key, value, Vsi, Koncali) %>%
@@ -43,6 +41,8 @@ gather(razmerje_uspeh, key, value, Vsi, Koncali) %>%
   geom_line(size =1) + ggtitle("Število odstopov skozi čas") + theme(legend.position = "right") +
   theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) + ylab("Število tekmovalcev") +
-  scale_y_continuous(breaks = seq(0, 200, by =25)) 
+  scale_y_continuous(breaks = seq(0, 200, by =25)) +
+  scale_color_discrete(name = "Tekači", labels = c("Končali", "Vsi"))
+
 
 
