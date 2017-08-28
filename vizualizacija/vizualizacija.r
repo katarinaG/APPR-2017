@@ -56,4 +56,5 @@ ggplot(NULL, aes(x=Year)) +
   xlab("Leto") + ylab("Ure") + ggtitle("Povprečen čas")  + theme_minimal() +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) +
   scale_color_manual(values = c("F" = 'red','M' = 'blue', 'Ni podatka' = 'black')) +
-  geom_line(data = stevilo_sodelujocih_vsi, aes(y=Povprecen_cas_vsi), size= 1) 
+  geom_line(data = stevilo_sodelujocih_vsi, aes(y=Povprecen_cas_vsi), size= 1) + 
+  theme(plot.title = element_text(hjust = 0.5)) 
