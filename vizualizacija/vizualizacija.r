@@ -4,6 +4,15 @@ library(ggplot2)
 library(dplyr)
 library(reshape2)
 library(tidyr)
+library(sp)
+library(maptools)
+library(digest)
+gpclibPermit()
+library(rvest)
+library(gsubfn)
+library(readr)
+library(tibble)
+
 
 #Naredim tabelo, v kateri glede na spol in leto prikazem stevilo prijavljenih in povprecen cas
 
@@ -113,9 +122,25 @@ posamezniki <- rez %>% group_by(Name) %>% summarise(
 vsi <- sum(posamezniki$st_ljudi)
 posamezniki$procent <- (posamezniki$st_ljudi / vsi)
 
+
 # Narisimo tortni graf
 
 graf5 <- ggplot(posamezniki, aes(x = factor(1), y=procent,fill=factor(st_maratonov)) ) + 
-  geom_bar(width = 1,stat="identity")+coord_polar(theta = "y") + ggtitle("Število prijav posameznikov")  +
-  theme_void() +theme(legend.position="right", legend.title=element_blank(), plot.title = element_text(lineheight=3, color="black", size=14))
+  geom_bar(width = 1,stat="identity")+coord_polar(theta = "y") +
+  ggtitle("Število sodelovanj posameznikov") +
+  theme_void() + 
+  scale_fill_discrete(labels=c("1x" , "2x", "3x", "4x", "5x", "6x", "7x", "10x")) +
+  theme(legend.position="right", legend.title=element_blank(), plot.title = element_text(lineheight=2, color="black", size=14))
+
+#Naredim se zemljevid, ki bo prikazoval stevilo prijavljenih v 2017
+
+source("lib/uvozi.zemljevid.r")
+
+# Uvozimo zemljevid.
+
+zemljevid <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+                             "ne_50m_admin_0_countries", encoding = "Windows-1252") %>%
+  pretvori.zemljevid()
+
+msp <- rez%>% group_by(Country) %>% summarise(st_drz = length(Name))
 
