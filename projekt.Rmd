@@ -166,8 +166,20 @@ graf6
 ```
 
 ***
+ 
+# Napredna analiza podatkov
+
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding = "UTF-8")
+```
 
 
+
+***
+
+# Zaključek
+
+Projekt je bil odličen začetek spoznavanja s programom R, ki je koristen pri analizi in obdelavi večjega števila podatkov. Žal pri analizi EVerest maratona nisem mogla narediti večjih napovedi in opazovati pomembejših trendov skozi čas, saj so bili podatki skopi. Vsekakor pa sem se pri delu veliko naučila in bom znanje uporabe programa R v prihodnosti še poglobila.
 
 
 
