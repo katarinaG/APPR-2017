@@ -12,6 +12,7 @@ library(rvest)
 library(gsubfn)
 library(readr)
 library(tibble)
+library(formattable)
 
 
 #Naredim tabelo, v kateri glede na spol in leto prikazem stevilo prijavljenih in povprecen cas
@@ -50,19 +51,26 @@ graf1 <- ggplot(stevilo_sodelujocih, aes(x = Year, y = Stevilo_prijav, fill = Ge
 
 razmerje_uspeh <- data.frame(stevilo_sodelujocih_vsi$Stevilo_prijav_vsi, stevilo_sodelujocih_vsi$Koncali_vsi, stevilo_sodelujocih_vsi$Year)
 names(razmerje_uspeh) <- c( "Vsi", "Koncali", "Leto")
-graf2 <- gather(razmerje_uspeh, key, value, Vsi, Koncali) %>%
-  ggplot(aes(x=Leto, y=value, colour=key)) +
+seen <- gather(razmerje_uspeh, key, value, Vsi, Koncali)
+razmerje_uspeh$odstotek <- percent(razmerje_uspeh$Koncali / razmerje_uspeh$Vsi)
+
+graf2 <- ggplot(NULL) +
+  geom_line(data= seen, aes(x=Leto, y=value, colour = key), size = 1) +
   geom_line(size =1) + ggtitle("Število odstopov skozi čas") + theme(legend.position = "right") +
   theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) + ylab("Število tekmovalcev") +
   scale_y_continuous(breaks = seq(0, 200, by =25)) +
-  scale_color_discrete(name = "Tekači", labels = c("Končali", "Vsi"))
+  scale_color_discrete(name = "Tekači", labels = c("Končali", "Vsi")) +
+  geom_point(data = razmerje_uspeh, aes(x = Leto, y= Koncali, label = odstotek)) +
+  geom_text(data = razmerje_uspeh, aes(x= Leto, y = Koncali, label=odstotek),hjust=0.5, vjust=-0.5, size = 3)
+
 
 #Graf, ki prikazuje povprecno hitrost glede na spol in leto
 
 stev_sod <- stevilo_sodelujocih[-c(18),]
 ind <- which(is.na(stev_sod$Gender))
 stev_sod[ind, "Gender"] <- 'Ni podatka'
+stevilo_sodelujocih_vsi$Cifre <- strftime(stevilo_sodelujocih_vsi$Povprecen_cas_vsi + as.POSIXct(0, origin="1970-01-01"), format = "%X", tz = "UTC")
 
 graf3 <- ggplot(NULL, aes(x=Year)) + 
   geom_point(data= stev_sod, aes(y = Povprecen_cas, color=Gender), size=6, alpha=0.6) + 
@@ -70,7 +78,9 @@ graf3 <- ggplot(NULL, aes(x=Year)) +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) +
   scale_color_manual(values = c("F" = 'red','M' = 'blue', 'Ni podatka' = 'black'), name = "Spol", labels = c("Ženske", "Moški","Ni podatka")) +
   geom_line(data = stevilo_sodelujocih_vsi, aes(y=Povprecen_cas_vsi), size= 1) + 
-  theme(plot.title = element_text(hjust = 0.5)) 
+  geom_text(data = stevilo_sodelujocih_vsi, aes(y= Povprecen_cas_vsi, label = Cifre), size=3, vjust = -1.1) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_point(data= stevilo_sodelujocih_vsi, aes(y = Povprecen_cas_vsi), size=2, alpha=0.6)
 
 #Spreminjanje rekorda skozi čas
 
@@ -89,21 +99,6 @@ zmagovalci <- rbind(najhitrejsi(2003), najhitrejsi(2004), najhitrejsi(2005), naj
                     najhitrejsi(2007), najhitrejsi(2008), najhitrejsi(2009), najhitrejsi(2010),
                     najhitrejsi(2011), najhitrejsi(2012), najhitrejsi(2013), najhitrejsi(2014),
                     najhitrejsi(2015), najhitrejsi(2016), najhitrejsi(2017))
-
-#Poiscemo vse razlicne drzave iz katerih so tekmovalci in jih razdelimo po kontinentih
-drzave <- unique(rez$Country)
-
-#Razvrstimo jih po kontinentih
-azija <- c("Nepal", "Malaysia", "Japan", "India", "Phillipines", "Taiwan", "China", "Israel", "Singapore", 
-           "South Korea", "Thailand", "Vietnam","Lebanon" )
-evropa <- c("Poland", "Spain", "Germany", "United Kingdom", "France", "Italy", "Austria", "Denmark", "Netherlands", 
-            "Belgium", "Switzerland", "Finland", "Ireland", "Czech Republic", "Slovakia", "Hungary","Romania",
-            "Norway", "Sweden", "Estonia", "Russia","Lithunia")
-Samerika <- c("United States", "Canada")
-afrika <- c("South Africa")
-Jamerika <- c( "Brazil", "Chile", "Mexico", "Colombia")
-avstralija <- c("Australia", "New Zealand")
-
 
 #Narišimo graf, ki prikazuje čase zmagovalcev po posameznih letih 
 
@@ -129,7 +124,7 @@ graf5 <- ggplot(posamezniki, aes(x = factor(1), y=procent,fill=factor(st_maraton
   geom_bar(width = 1,stat="identity")+coord_polar(theta = "y") +
   ggtitle("Število sodelovanj posameznikov") +
   theme_void() + 
-  scale_fill_discrete(labels=c("1x" , "2x", "3x", "4x", "5x", "6x", "7x", "10x")) +
+  scale_fill_discrete(labels = sprintf("%dx - %.4f %%", posamezniki$st_maratonov, posamezniki$procent))+
   theme(legend.position="right", legend.title=element_blank(), plot.title = element_text(lineheight=2, color="black", size=14))
 
 #Naredim se zemljevid, ki bo prikazoval stevilo prijavljenih v 2017
@@ -144,3 +139,14 @@ zemljevid <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturale
 
 msp <- rez%>% group_by(Country) %>% summarise(st_drz = length(Name))
 
+#Preverim katera imena se ne ujemajo in jih popravim
+ne_ujema <- msp$Country[! msp$Country %in% zemljevid$sovereignt]
+
+msp$Country[msp$Country == "Lithunia"] <- "Lithuania"
+msp$Country[msp$Country == "Phillipines"] <- "Philippines"
+msp$Country[msp$Country == "United States"] <- "United States of America"
+
+zem <- msp[-c(45),]
+colnames(zem)<- c("Country", "Število")
+graf6 <- ggplot() + geom_polygon(data = left_join(zemljevid, zem, by = c("sovereignt" = "Country")), 
+                        aes(x = long, y = lat, group = group, fill = Število))  + xlab("") + ylab("")

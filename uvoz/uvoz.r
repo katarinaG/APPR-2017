@@ -425,7 +425,8 @@ rez$Nationality[rez$Nationality == "Canadian"] <- "Canada"
 rez$Nationality[rez$Nationality == "Austrian"] <- "Austria"
 rez$Nationality[rez$Nationality == "Malaysian"] <- "Malaysia"
 rez$Nationality[rez$Nationality == "Danish"] <- "Denmark"
-
+rez$Nationality[rez$Nationality == "Lithunia"] <- "Lithuania"
+rez$Nationality[rez$Nationality == "Danish"] <- "Denmark"
 
 names(rez)[names(rez) == "Nationality"] <- "Country"
 
