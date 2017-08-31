@@ -172,8 +172,12 @@ graf6
 ```{r analiza, echo=FALSE, message=FALSE}
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
+Za konec sem se odločila napovedati gibanje števila prijav v prihodnjih letih z uporabo linearne, polinomske in eksponentne regresije. 
 
 
+```{r n1, echo=FALSE, fig.align='center'}
+napovedi
+```
 
 ***
 
