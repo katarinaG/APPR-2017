@@ -106,8 +106,8 @@ graf4 <- ggplot(zmagovalci, aes(x=Year, y=Time)) +
   geom_point(size=6, alpha=0.6, color = "blue") + 
   xlab("Leto") + ylab("Ure") + ggtitle("Časi zmagovalcev")  + theme_minimal() +
   scale_x_continuous(breaks = seq(2003, 2017, by =1)) +
-  scale_y_continuous(breaks = seq(3.4, 4.5, by = 0.1)) +
-  theme(plot.title = element_text(hjust = 0.5)) + geom_text(aes(label = Best), size = 3.5, vjust = -1.5)
+  theme(plot.title = element_text(hjust = 0.5)) + geom_text(aes(label = Best), size = 3.5, vjust = -1.5) +
+  ylim(3.4, 4.4)
 
 #Naredimo tabelo, ki prikaze stevilo tekmovalcev glede na stevilo njihovih udejstvovanj
 
@@ -150,3 +150,5 @@ zem <- msp[-c(45),]
 colnames(zem)<- c("Country", "Število")
 graf6 <- ggplot() + geom_polygon(data = left_join(zemljevid, zem, by = c("sovereignt" = "Country")), 
                         aes(x = long, y = lat, group = group, fill = Število))  + xlab("") + ylab("")
+
+

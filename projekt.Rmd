@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning = FALSE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -27,7 +27,7 @@ Za temo svojega projekta sem izbrala Everest maraton. To je najvišje izveden ma
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE, warning = FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
@@ -66,7 +66,7 @@ Kot sem že omenila, so se tabele iz spletne strani razlikovale. Naj naštejem l
 Urejene tabele so izgledale torej tako:
 
 
-```{r tabela1}
+```{r tabela1, message=FALSE, warning = FALSE}
 kable(head(rez17))
 ```
 
@@ -84,7 +84,7 @@ Nova tabela je poskrbela za enoličnost ter imela 5 stolpcev:
 
 5. stolpec "Time"(double): čas
 
-```{r tabela2}
+```{r tabela2,  message=FALSE, warning = FALSE}
 kable(head(rez))
 ```
 
@@ -94,7 +94,7 @@ kable(head(rez))
 # Analiza in vizualizacija podatkov
 
 
-```{r vizualizacija, echo=FALSE, message=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
@@ -117,7 +117,7 @@ Iz grafa pa lahko prav tako opazimo, da se število tekmovalk in tudi delež že
 
 Ker so gorski maratoni težka preizkušnja, je naslednja stvar, ki me je zanimala število odstopov. Tokrat sem podatke sortirala zgolj na leto, saj zaradi pogoste nedefiniranosti spola sortiranje še na to spremenljivko ne bi bilo smiselno. Spodnji graf prikazuje število vseh prijavljenih z modro črto, število vseh, ki so maraton tudi uspešno pretekli z rdečo črto, točke pa določajo odstotek uspešnih tekačev za posamezno leto.
 
-```{r graf1, echo=FALSE, fig.align='center'}
+```{r graf1, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
 graf2
 ```
 Opazimo, da je odstotek odstopov majhen, kar ne preseneča, saj se na takšno preizkušnjo prijavi zgolj odlično pripravljeni športniki. Opazimo tudi, da število odstopov raste sorazmerno s številom prijav.
@@ -128,7 +128,7 @@ Za razliko od klasičnih maratonov, pri katerih se rekordni čas giblje okoli dv
 V naslednjem grafu sem s točkami prikazala povprečne čase ločene glede na spol. Ker pa rezultati za nekatera leta niso vsebovali podatkov o spolu ali pa je bil odstotek le teh zelo majhen, nas lahko aritmetična sredina povprečnih časov privede do velikih odstopanj. Zato sem v graf dodala tudi črto, ki prikazuje povprečni čas vseh tekačev.
 
 
-```{r graf2, echo=FALSE, fig.align='center'}
+```{r graf2, echo=FALSE, fig.align='center',message=FALSE, warning = FALSE}
 graf3
 ```
 
@@ -139,7 +139,7 @@ Ne preseneča nas, da so povprečni časi moških krajši kot povprečni časi �
 Poleg povprečnih časov pa so pri vsakem teku zanimivi in omembne vredni časi zmagovalcev. Te prikazuje spodnji graf.
 
 
-```{r graf3, echo=FALSE, fig.align='center'}
+```{r graf3, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
 graf4
 ```
 
@@ -150,7 +150,7 @@ Iz grafa vidimo, da so časi zelo raznoliki ter se gibljejo okoli 4:00h s odklon
 Everest maraton je za vse prav posebna izkušnja. Poteka v osrčju Himalaje, kjer so specifični pogoji. Tekmovalci se morajo pred začetkom, opremljeni s težkimi nahrbtniki, odpraviti na večdnevni pohod do starta - prvega baznega tabora. Ker tam ni vode, elektrike in ostalih nam samoumevnih dobrin, maraton predstavlja velik izziv tudi za organizatorje. Posledično so zneski prijave na maraton visoki, kar prav tako pojasnjuje nizko število prijav. Zaradi vseh opisanih razlogov me je zanimala statistika števila prijav posameznikov. To pregledno prikazuje spodnji graf.
 
 
-```{r graf4, echo=FALSE, fig.align='center'}
+```{r graf4, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
 graf5
 ```
 
@@ -160,7 +160,7 @@ Opazimo, da skoraj 94% tekačev sodeluje samo enkrat, nekaj pa se naj bi jih mar
 
 Na spodnjem zemljevidu so prikazane države iz katerih so tekači, ki so se od leta 2003 udeležili maratona. Odtenek barve, s katero je obarvana posamezna država, ponazarja število športnikov. Opazimo, da močno izstopa Nepal, vseh Nepalcev je bilo kar več kot 600. Za njem opazimo še USA in Veliko Britanijo, pri vseh ostalih državah pa je število tekmovalcev dosti manjše.
 
-```{r zemljevid, echo=FALSE, fig.align='center'}
+```{r zemljevid, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
 graf6
 
 ```
@@ -169,15 +169,17 @@ graf6
  
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE}
+```{r analiza, echo=FALSE, message=FALSE,  warning = FALSE}
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
-Za konec sem se odločila napovedati gibanje števila prijav v prihodnjih letih z uporabo linearne, polinomske in eksponentne regresije. 
+Za konec sem se odločila napovedati gibanje števila prijav v prihodnjih letih z uporabo linearne, polinomske in eksponentne regresije.
 
 
-```{r n1, echo=FALSE, fig.align='center'}
+```{r n1, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
 napovedi
 ```
+
+Črna črta prikazuje nihanje dejanskega števila prijavljenih, zelene točke pa prikazujejo napoved rasti števila tekačev. Model eksponentne regresije v tem primeru ne bi bil smiseln, saj bi napoved začela že kmalu zelo hitro rasti.
 
 ***
 
