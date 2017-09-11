@@ -176,7 +176,7 @@ Za konec sem se odločila napovedati gibanje števila prijav v prihodnjih letih 
 
 
 ```{r n1, echo=FALSE, fig.align='center', message=FALSE, warning = FALSE}
-napovedi
+napovediskupaj
 ```
 
 Črna črta prikazuje nihanje dejanskega števila prijavljenih, zelene točke pa prikazujejo napoved rasti števila tekačev. Model eksponentne regresije v tem primeru ne bi bil smiseln, saj bi napoved začela že kmalu zelo hitro rasti.
