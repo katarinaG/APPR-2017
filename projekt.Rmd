@@ -74,15 +74,15 @@ Nato pa sem vse združila v skupno tabelo, ki sem jo kasneje uporabljala za anal
 Zaradi lažjega analiziranja sem čas združila v en skupen stolpev, prav tako pa sem poskrbela za enoličnost pri zapisu držav. Nekatere tabele so namreč imele zapise držav (npr. Nepal), druge državljanstvo (npr. Nepalese), prav tako pa so bili pri določenih državah možni različni zapisi imen (npr. USA, United States, U.S.A.).
 Nova tabela je poskrbela za enoličnost ter imela 5 stolpcev:
 
-1. stolpec "Name" (integer): ime
+1. stolpec "Name": ime
 
-2. stolpec "Gender"(character): spol
+2. stolpec "Gender": spol
 
-3. stolpec "Country"(character): država
+3. stolpec "Country": država
 
-4. stolpec "Year"(double): leto
+4. stolpec "Year": leto
 
-5. stolpec "Time"(double): čas
+5. stolpec "Time": čas
 
 ```{r tabela2,  message=FALSE, warning = FALSE}
 kable(head(rez))

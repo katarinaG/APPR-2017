@@ -71,3 +71,5 @@ vsota.kvadratov <- sapply(list(fit1, fit2, fit3), function(x) sum(x$residuals^2)
 
 napovedi <- ggarrange(napoved1, napoved2 + rremove("x.text"), ncol = 1, nrow = 2)
 
+
+
